@@ -1,15 +1,29 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  data: Array,
+});
+const { data } = props;
+console.debug("data", data);
+</script>
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
-      <span class="profile-name">ChanKim</span>
+      <div
+        class="profile"
+        :style="{ backgroundImage: `url(${data.userImage})` }"
+      ></div>
+      <span class="profile-name">{{ data.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <div
+      class="post-body"
+      :style="{ backgroundImage: `url(${data.postImage})` }"
+    ></div>
     <div class="post-content">
-      <p>43 Likes</p>
-      <p><strong>글쓴이아이디</strong> 임시내용</p>
-      <p class="date">May 15</p>
+      <p>{{ liked ? `${likes} Likes` : "0 Likes" }}</p>
+      <p>
+        <strong>{{ data.name }}</strong> {{ data.content }}
+      </p>
+      <p class="date">{{ data.date }}</p>
     </div>
   </div>
 </template>
