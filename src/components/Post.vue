@@ -3,7 +3,6 @@ const props = defineProps({
   data: Array,
 });
 const { data } = props;
-console.debug("data", data);
 </script>
 <template>
   <div class="post">

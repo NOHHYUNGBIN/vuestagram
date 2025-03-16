@@ -1,8 +1,8 @@
 <script setup>
-import postData from "@/assets/postData";
 import Post from "./Post.vue";
-import { ref } from "vue";
-const dataList = ref(postData);
+const props = defineProps({
+  dataList: Array,
+});
 </script>
 <template>
   <div>
