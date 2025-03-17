@@ -5,6 +5,7 @@ import postData from "@/assets/postData";
 import { ref } from "vue";
 
 const dataList = ref(postData);
+const currTab = ref(2);
 const morePost = () => {
   axios
     .get("https://codingapple1.github.io/vue/more0.json")
@@ -25,7 +26,7 @@ const morePost = () => {
     <img src="./assets/logo.svg" class="logo" />
   </div>
 
-  <Container :dataList="dataList" />
+  <Container :dataList="dataList" :currTab="currTab" />
   <button @click="morePost">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">

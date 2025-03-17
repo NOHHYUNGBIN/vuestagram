@@ -2,25 +2,31 @@
 import Post from "./Post.vue";
 const props = defineProps({
   dataList: Array,
+  currTab: Number,
 });
 </script>
 <template>
   <div>
-    <Post v-for="(data, idx) in dataList" :key="`post${idx}`" :data="data" />
-    <!-- 필터선택페이지 -->
-    <div class="upload-image"></div>
-    <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+    <div v-if="currTab === 0">
+      <Post v-for="(data, idx) in dataList" :key="`post${idx}`" :data="data" />
     </div>
-
+    <!-- 필터선택페이지 -->
+    <div v-if="currTab === 1">
+      <div class="upload-image"></div>
+      <div class="filters">
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+      </div>
+    </div>
     <!-- 글작성페이지 -->
-    <div class="upload-image"></div>
-    <div class="write">
-      <textarea class="write-box">write!</textarea>
+    <div v-if="currTab === 2">
+      <div class="upload-image"></div>
+      <div class="write">
+        <textarea class="write-box">write!</textarea>
+      </div>
     </div>
   </div>
 </template>
