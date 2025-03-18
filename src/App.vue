@@ -5,13 +5,20 @@ import postData from "@/assets/postData";
 import { ref } from "vue";
 
 const dataList = ref(postData);
-const currTab = ref(2);
+const currTab = ref(0);
+const uploadUrl = ref("");
 const morePost = () => {
   axios
     .get("https://codingapple1.github.io/vue/more0.json")
     .then(({ data }) => {
       dataList.value.push(data);
     });
+};
+const upload = (e) => {
+  const file = e.target.files;
+  const setUrl = URL.createObjectURL(file[0]);
+  uploadUrl.value = setUrl;
+  currTab.value = 1;
 };
 </script>
 
@@ -26,11 +33,11 @@ const morePost = () => {
     <img src="./assets/logo.svg" class="logo" />
   </div>
 
-  <Container :dataList="dataList" :currTab="currTab" />
+  <Container :dataList="dataList" :currTab="currTab" :uploadUrl="uploadUrl" />
   <button @click="morePost">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
