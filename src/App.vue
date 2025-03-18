@@ -20,15 +20,22 @@ const upload = (e) => {
   uploadUrl.value = setUrl;
   currTab.value = 1;
 };
+const handleCancel = () => {
+  if (currTab.value === 0) return;
+  currTab.value--;
+};
+const handleNext = () => {
+  currTab.value++;
+};
 </script>
 
 <template>
   <div class="header">
-    <ul class="header-button-left">
-      <li>Cancel</li>
+    <ul class="header-button-left" v-if="currTab !== 0">
+      <li @click="handleCancel">{{ currTab === 1 ? "Cancel" : "Prev" }}</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="handleNext" v-if="currTab !== 2">Next</li>
     </ul>
     <img src="./assets/logo.svg" class="logo" />
   </div>
