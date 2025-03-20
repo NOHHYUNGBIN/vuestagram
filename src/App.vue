@@ -7,6 +7,13 @@ import { ref } from "vue";
 const dataList = ref(postData);
 const currTab = ref(0);
 const uploadUrl = ref("");
+const inputValue = ref("");
+const formattedDate = ref(
+  new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(
+    new Date()
+  )
+);
+let debounce = null;
 const morePost = () => {
   axios
     .get("https://codingapple1.github.io/vue/more0.json")
@@ -27,6 +34,29 @@ const handleCancel = () => {
 const handleNext = () => {
   currTab.value++;
 };
+const publish = () => {
+  const setData = {
+    name: "Kim Hyun",
+    userImage: "https://picsum.photos/100?random=3",
+    postImage: uploadUrl.value,
+    likes: 0,
+    date: formattedDate.value,
+    liked: false,
+    content: inputValue.value,
+    filter: "perpetua",
+  };
+  dataList.value.unshift(setData);
+  currTab.value = 0;
+};
+const setWrite = (value) => {
+  inputValue.value = value;
+};
+const debounceWrite = (value) => {
+  clearTimeout(debounce);
+  debounce = setTimeout(() => {
+    setWrite(value);
+  }, 500);
+};
 </script>
 
 <template>
@@ -35,12 +65,18 @@ const handleNext = () => {
       <li @click="handleCancel">{{ currTab === 1 ? "Cancel" : "Prev" }}</li>
     </ul>
     <ul class="header-button-right">
-      <li @click="handleNext" v-if="currTab !== 2">Next</li>
+      <li @click="handleNext" v-if="currTab === 1">Next</li>
+      <li @click="publish" v-if="currTab === 2">발행</li>
     </ul>
     <img src="./assets/logo.svg" class="logo" />
   </div>
 
-  <Container :dataList="dataList" :currTab="currTab" :uploadUrl="uploadUrl" />
+  <Container
+    :dataList="dataList"
+    :currTab="currTab"
+    :uploadUrl="uploadUrl"
+    @write="debounceWrite"
+  />
   <button @click="morePost">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">

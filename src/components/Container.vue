@@ -5,8 +5,7 @@ const props = defineProps({
   currTab: Number,
   uploadUrl: String,
 });
-console.debug(props.currTab);
-console.debug(props.uploadUrl);
+const emit = defineEmits(["write"]);
 </script>
 <template>
   <div>
@@ -34,7 +33,11 @@ console.debug(props.uploadUrl);
         :style="{ backgroundImage: `url(${uploadUrl})` }"
       ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          placeholder="내용을 작성해주세요."
+          class="write-box"
+          @input="emit('write', $event.target.value)"
+        ></textarea>
       </div>
     </div>
   </div>
@@ -74,7 +77,7 @@ console.debug(props.uploadUrl);
   background: #555;
 }
 .write-box {
-  border: none;
+  /* border: none; */
   width: 90%;
   height: 100px;
   padding: 15px;
