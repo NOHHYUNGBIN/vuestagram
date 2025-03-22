@@ -26,7 +26,7 @@ const emit = defineEmits(["write"]);
           :key="filter"
           :uploadUrl="uploadUrl"
           :filter="filter"
-          >{{ filter }}</FilterBox
+          ><template v-slot:filterName>{{ filter }}</template></FilterBox
         >
       </div>
     </div>

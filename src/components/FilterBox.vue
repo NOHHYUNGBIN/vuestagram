@@ -8,7 +8,9 @@ const props = defineProps({
   <div
     :class="`${filter} filter-item`"
     :style="{ backgroundImage: `url(${uploadUrl})` }"
-  ></div>
+  >
+    <slot name="filterName"></slot>
+  </div>
 </template>
 <style scoped>
 .filter-item {
