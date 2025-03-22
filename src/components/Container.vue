@@ -1,5 +1,7 @@
 <script setup>
+import FilterBox from "./FilterBox.vue";
 import Post from "./Post.vue";
+import filters from "@/assets/filters";
 const props = defineProps({
   dataList: Array,
   currTab: Number,
@@ -19,11 +21,13 @@ const emit = defineEmits(["write"]);
         :style="{ backgroundImage: `url(${uploadUrl})` }"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          v-for="filter in filters"
+          :key="filter"
+          :uploadUrl="uploadUrl"
+          :filter="filter"
+          >{{ filter }}</FilterBox
+        >
       </div>
     </div>
     <!-- 글작성페이지 -->
