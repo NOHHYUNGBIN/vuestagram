@@ -2,17 +2,20 @@
 import axios from "axios";
 import Container from "./components/Container.vue";
 import postData from "@/assets/postData";
-import { ref } from "vue";
+import { getCurrentInstance, onMounted, ref } from "vue";
 
 const dataList = ref(postData);
 const currTab = ref(0);
 const uploadUrl = ref("");
 const inputValue = ref("");
+const setFilter = ref(null);
 const formattedDate = ref(
   new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(
     new Date()
   )
 );
+const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
+
 let debounce = null;
 const morePost = () => {
   axios
@@ -57,6 +60,11 @@ const debounceWrite = (value) => {
     setWrite(value);
   }, 500);
 };
+onMounted(() => {
+  emitter.on("filterName", (filterName) => {
+    setFilter.value = filterName;
+  });
+});
 </script>
 
 <template>
@@ -75,6 +83,7 @@ const debounceWrite = (value) => {
     :dataList="dataList"
     :currTab="currTab"
     :uploadUrl="uploadUrl"
+    :setFilter="setFilter"
     @write="debounceWrite"
   />
   <button @click="morePost">더보기</button>

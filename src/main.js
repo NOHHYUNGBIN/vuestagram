@@ -1,6 +1,10 @@
-import './assets/main.css'
+import "./assets/main.css";
+import { createApp } from "vue";
+import App from "./App.vue";
+import mitt from "mitt";
 
-import { createApp } from 'vue'
-import App from './App.vue'
+let emitter = mitt();
+let app = createApp(App);
+app.config.globalProperties.emitter = emitter;
 
-createApp(App).mount('#app')
+app.mount("#app");

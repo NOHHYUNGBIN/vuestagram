@@ -6,6 +6,10 @@ const props = defineProps({
   dataList: Array,
   currTab: Number,
   uploadUrl: String,
+  setFilter: {
+    type: String,
+    default: null,
+  },
 });
 const emit = defineEmits(["write"]);
 </script>
@@ -17,7 +21,7 @@ const emit = defineEmits(["write"]);
     <!-- 필터선택페이지 -->
     <div v-if="currTab === 1">
       <div
-        class="upload-image"
+        :class="`${setFilter} upload-image`"
         :style="{ backgroundImage: `url(${uploadUrl})` }"
       ></div>
       <div class="filters">
@@ -33,7 +37,7 @@ const emit = defineEmits(["write"]);
     <!-- 글작성페이지 -->
     <div v-if="currTab === 2">
       <div
-        class="upload-image"
+        :class="`${setFilter} upload-image`"
         :style="{ backgroundImage: `url(${uploadUrl})` }"
       ></div>
       <div class="write">

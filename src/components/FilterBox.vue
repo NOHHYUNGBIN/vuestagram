@@ -1,11 +1,20 @@
 <script setup>
+import { getCurrentInstance } from "vue";
+
+const { appContext } = getCurrentInstance();
+const emitter = appContext.config.globalProperties.emitter;
 const props = defineProps({
   uploadUrl: String,
   filter: String,
 });
+
+const sendFilterName = (filterName) => {
+  emitter.emit("filterName", filterName);
+};
 </script>
 <template>
   <div
+    @click="() => sendFilterName(filter)"
     :class="`${filter} filter-item`"
     :style="{ backgroundImage: `url(${uploadUrl})` }"
   >
