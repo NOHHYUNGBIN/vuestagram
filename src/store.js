@@ -8,7 +8,7 @@ const store = createStore({
   },
   mutations: {
     ADD_POST(state, newPost) {
-      state.postData = [newPost, ...state.postData];
+      state.postData.unshift(newPost);
     },
     ADD_LIKE(state, id) {
       const post = state.postData.find((data) => data.id === id);

@@ -41,7 +41,7 @@ const handleNext = () => {
 };
 const publish = () => {
   const setData = {
-    id: dataList.length + 1,
+    id: dataList.value.length + 1,
     name: "Kim Hyun",
     userImage: "https://picsum.photos/100?random=3",
     postImage: uploadUrl.value,
