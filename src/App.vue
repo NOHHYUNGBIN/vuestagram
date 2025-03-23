@@ -46,7 +46,7 @@ const publish = () => {
     date: formattedDate.value,
     liked: false,
     content: inputValue.value,
-    filter: "perpetua",
+    filter: setFilter,
   };
   dataList.value.unshift(setData);
   currTab.value = 0;
@@ -76,7 +76,7 @@ onMounted(() => {
       <li @click="handleNext" v-if="currTab === 1">Next</li>
       <li @click="publish" v-if="currTab === 2">발행</li>
     </ul>
-    <img src="./assets/logo.svg" class="logo" />
+    <img src="./assets/logo.svg" class="log o" />
   </div>
 
   <Container

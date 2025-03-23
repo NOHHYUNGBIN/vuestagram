@@ -14,7 +14,7 @@ const { data } = props;
       <span class="profile-name">{{ data.name }}</span>
     </div>
     <div
-      class="post-body"
+      :class="`${data.filter} post-body`"
       :style="{ backgroundImage: `url(${data.postImage})` }"
     ></div>
     <div class="post-content">
