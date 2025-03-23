@@ -1,9 +1,10 @@
 <script setup>
+import { useStore } from "vuex";
 import FilterBox from "./FilterBox.vue";
 import Post from "./Post.vue";
 import filters from "@/assets/filters";
+import { computed } from "vue";
 const props = defineProps({
-  dataList: Array,
   currTab: Number,
   uploadUrl: String,
   setFilter: {
@@ -11,6 +12,9 @@ const props = defineProps({
     default: null,
   },
 });
+const store = useStore();
+// const dataList = store.state.postData;
+const dataList = computed(() => store.state.postData);
 const emit = defineEmits(["write"]);
 </script>
 <template>

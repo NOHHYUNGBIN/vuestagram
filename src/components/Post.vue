@@ -1,8 +1,14 @@
 <script setup>
+import { useStore } from "vuex";
+
 const props = defineProps({
   data: Array,
 });
 const { data } = props;
+const store = useStore();
+const handleLike = (id) => {
+  data.liked ? store.commit("SUB_LIKE", id) : store.commit("ADD_LIKE", id);
+};
 </script>
 <template>
   <div class="post">
@@ -14,11 +20,12 @@ const { data } = props;
       <span class="profile-name">{{ data.name }}</span>
     </div>
     <div
+      @dblclick="() => handleLike(data.id)"
       :class="`${data.filter} post-body`"
       :style="{ backgroundImage: `url(${data.postImage})` }"
     ></div>
     <div class="post-content">
-      <p>{{ liked ? `${likes} Likes` : "0 Likes" }}</p>
+      <p>{{ `${data.liked ? "♥" : "♡"} ${data.likes} likes` }}</p>
       <p>
         <strong>{{ data.name }}</strong> {{ data.content }}
       </p>

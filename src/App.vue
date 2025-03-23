@@ -1,10 +1,12 @@
 <script setup>
 import axios from "axios";
 import Container from "./components/Container.vue";
-import postData from "@/assets/postData";
-import { getCurrentInstance, onMounted, ref } from "vue";
+import { computed, getCurrentInstance, onMounted, ref } from "vue";
+import { useStore } from "vuex";
 
-const dataList = ref(postData);
+const store = useStore();
+// const dataList = store.state.postData;
+const dataList = computed(() => store.state.postData);
 const currTab = ref(0);
 const uploadUrl = ref("");
 const inputValue = ref("");
@@ -39,6 +41,7 @@ const handleNext = () => {
 };
 const publish = () => {
   const setData = {
+    id: dataList.length + 1,
     name: "Kim Hyun",
     userImage: "https://picsum.photos/100?random=3",
     postImage: uploadUrl.value,
@@ -46,9 +49,10 @@ const publish = () => {
     date: formattedDate.value,
     liked: false,
     content: inputValue.value,
-    filter: setFilter,
+    filter: "perpetua",
   };
-  dataList.value.unshift(setData);
+  // dataList.value.unshift(setData);
+  store.commit("ADD_POST", setData);
   currTab.value = 0;
 };
 const setWrite = (value) => {
@@ -76,11 +80,10 @@ onMounted(() => {
       <li @click="handleNext" v-if="currTab === 1">Next</li>
       <li @click="publish" v-if="currTab === 2">발행</li>
     </ul>
-    <img src="./assets/logo.svg" class="log o" />
+    <img src="./assets/logo.svg" class="logo" />
   </div>
 
   <Container
-    :dataList="dataList"
     :currTab="currTab"
     :uploadUrl="uploadUrl"
     :setFilter="setFilter"
