@@ -19,13 +19,13 @@ const formattedDate = ref(
 const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
 
 let debounce = null;
-const morePost = () => {
-  axios
-    .get("https://codingapple1.github.io/vue/more0.json")
-    .then(({ data }) => {
-      dataList.value.push(data);
-    });
-};
+// const morePost = () => {
+//   axios
+//     .get("https://codingapple1.github.io/vue/more0.json")
+//     .then(({ data }) => {
+//       dataList.value.push(data);
+//     });
+// };
 const upload = (e) => {
   const file = e.target.files;
   const setUrl = URL.createObjectURL(file[0]);
@@ -89,7 +89,7 @@ onMounted(() => {
     :setFilter="setFilter"
     @write="debounceWrite"
   />
-  <button @click="morePost">더보기</button>
+  <button @click="store.dispatch('moreData')">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" id="file" class="inputfile" />
