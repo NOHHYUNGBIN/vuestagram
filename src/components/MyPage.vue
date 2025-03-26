@@ -4,13 +4,13 @@ import { onMounted, ref } from "vue";
 
 export default {
   setup() {
-    let follower = ref([]);
+    let followers = ref([]);
     onMounted(() => {
       axios.get("/follower.json").then((res) => {
-        follower.value = res.data;
+        followers.value = res.data;
       });
     });
-    return { follower };
+    return { followers };
   },
 };
 </script>
@@ -18,9 +18,16 @@ export default {
   <div style="padding: 10px">
     <h4>팔로워</h4>
     <input placeholder="?" />
-    <div class="post-header">
-      <div class="profile"></div>
-      <span class="profile-name">{{ follower }}</span>
+    <div
+      class="post-header"
+      v-for="(follower, i) in followers"
+      :key="follower.id"
+    >
+      <div
+        class="profile"
+        :style="`background-image:url(${follower.image})`"
+      ></div>
+      <span class="profile-name">{{ follower.name }}</span>
     </div>
   </div>
 </template>
