@@ -4,6 +4,7 @@ import FilterBox from "./FilterBox.vue";
 import Post from "./Post.vue";
 import filters from "@/assets/filters";
 import { computed } from "vue";
+import MyPage from "./MyPage.vue";
 const props = defineProps({
   currTab: Number,
   uploadUrl: String,
@@ -51,6 +52,9 @@ const emit = defineEmits(["write"]);
           @input="emit('write', $event.target.value)"
         ></textarea>
       </div>
+    </div>
+    <div v-if="currTab === 3">
+      <MyPage />
     </div>
   </div>
 </template>

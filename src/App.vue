@@ -7,7 +7,7 @@ import { useStore } from "vuex";
 const store = useStore();
 // const dataList = store.state.postData;
 const dataList = computed(() => store.state.postData);
-const currTab = ref(0);
+const currTab = ref(3);
 const uploadUrl = ref("");
 const inputValue = ref("");
 const setFilter = ref(null);
