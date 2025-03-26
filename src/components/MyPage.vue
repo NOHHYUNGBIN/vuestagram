@@ -18,14 +18,10 @@ export default {
   <div style="padding: 10px">
     <h4>팔로워</h4>
     <input placeholder="?" />
-    <div
-      class="post-header"
-      v-for="(follower, i) in followers"
-      :key="follower.id"
-    >
+    <div class="post-header" v-for="follower in followers" :key="follower.id">
       <div
         class="profile"
-        :style="`background-image:url(${follower.image})`"
+        :style="{ backgroundImage: `url(${follower.image})` }"
       ></div>
       <span class="profile-name">{{ follower.name }}</span>
     </div>
