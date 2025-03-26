@@ -33,7 +33,7 @@ const handleLike = (id) => {
     </div>
   </div>
 </template>
-<style scoped>
+<style>
 .post {
   width: 100%;
 }
